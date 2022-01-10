@@ -4,6 +4,13 @@
   "description": "",
   "main": "dist/index.js",
   "private": false,
+  "files": [
+    "dist/**/*"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "react storybook webpack"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
