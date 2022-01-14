@@ -1,19 +1,14 @@
 import { resolve } from "path";
 import { Configuration } from "webpack";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 export default {
-  //   entry: resolve(__dirname, "src", "index.ts"),
-  entry: {
-    Button: "./src/Button/index.ts",
-    Input: "./src/Input/index.ts",
-  },
+  entry: resolve(__dirname, "src", "index.ts"),
   output: {
     path: resolve(__dirname, "dist"),
-    filename: "[name]/[name].js",
+    filename: "index.js",
     library: {
       type: "umd",
-      name: "@sns/test",
+      name: "sns-test",
     },
   },
   externals: ["react"],
@@ -21,23 +16,19 @@ export default {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        include: resolve(__dirname, "src"),
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.tsx?$/,
-        use: ["ts-loader"],
+        use: ["babel-loader", "ts-loader"],
         include: resolve(__dirname, "src"),
         exclude: [/\.(stories|spec|test).tsx?$/],
       },
     ],
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: "[name]/[name].css",
-    }),
-  ],
   resolve: {
     extensions: [".ts", ".tsx", "..."],
   },
-  mode: "development",
+  mode: "production",
 } as Configuration;

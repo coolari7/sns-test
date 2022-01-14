@@ -1,8 +1,9 @@
 {
-  "name": "@sns/test",
+  "name": "sns-test",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/cjs/index.js",
+  "types": "dist/cjs/index.d.ts",
   "private": false,
   "files": [
     "dist/**/*"
@@ -15,14 +16,21 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
     "clean": "rimraf dist",
-    "build": "npm run clean && npm run build:es6 && npm run build:umd",
+    "build:storybook": "build-storybook",
+    "build:babel": "babel src -x .ts,.tsx --ignore src/**/*.stories.tsx --copy-files --no-copy-ignored",
+    "build:types": "tsc --declaration --emitDeclarationOnly",
+    "build:cjs": "npm run build:babel -- -d dist/cjs && npm run build:types -- --outDir dist/cjs",
+    "build:esm": "npm run build:babel -- -d dist/esm && npm run build:types -- --outDir dist/esm",
     "build:umd": "webpack -c webpack.config.ts",
-    "build:es6": "tsc -m es6",
-    "build:storybook": "build-storybook"
+    "prebuild": "npm run clean",
+    "build": "npm run build:cjs && npm run build:esm && npm run build:umd",
+    "prebuildv2": "npm run clean",
+    "buildv2": "ts-node scripts/build.ts"
   },
   "author": "Arijit Chowdhury",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
@@ -56,12 +64,5 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
-  "dependencies": {},
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react",
-      "@babel/preset-typescript"
-    ]
-  }
+  "dependencies": {}
 }
