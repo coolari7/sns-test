@@ -8,7 +8,6 @@ export default {
     filename: "index.js",
     library: {
       type: "umd",
-      name: "sns-test",
     },
   },
   externals: ["react"],

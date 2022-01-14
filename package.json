@@ -1,8 +1,9 @@
 {
   "name": "sns-test",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.1.0",
+  "description": "POC on packaging a React TS Component Library",
   "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "types": "dist/cjs/index.d.ts",
   "private": false,
   "files": [
