@@ -17,15 +17,8 @@
     "storybook": "start-storybook -p 6006",
     "clean": "rimraf dist",
     "build:storybook": "build-storybook",
-    "build:babel": "babel src -x .ts,.tsx --ignore src/**/*.stories.tsx --copy-files --no-copy-ignored",
-    "build:types": "tsc --declaration --emitDeclarationOnly",
-    "build:cjs": "npm run build:babel -- -d dist/cjs && npm run build:types -- --outDir dist/cjs",
-    "build:esm": "npm run build:babel -- -d dist/esm && npm run build:types -- --outDir dist/esm",
-    "build:umd": "webpack -c webpack.config.ts",
     "prebuild": "npm run clean",
-    "build": "npm run build:cjs && npm run build:esm && npm run build:umd",
-    "prebuildv2": "npm run clean",
-    "buildv2": "ts-node scripts/build.ts"
+    "build": "ts-node scripts/build.ts"
   },
   "author": "Arijit Chowdhury",
   "license": "ISC",
