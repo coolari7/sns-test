@@ -16,12 +16,7 @@ export default {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        include: resolve(__dirname, "src"),
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.tsx?$/,
+        test: /\.ts$/,
         use: ["babel-loader", "ts-loader"],
         include: resolve(__dirname, "src"),
         exclude: [/\.(stories|spec|test).tsx?$/],
@@ -29,7 +24,7 @@ export default {
     ],
   },
   resolve: {
-    extensions: [".ts", ".tsx", "..."],
+    extensions: [".ts", ".tsx"],
   },
   mode: "production",
 } as Configuration;

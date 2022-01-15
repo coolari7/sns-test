@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "build": "ts-node ../../scripts/build.ts",
+    "prepublishOnly": "npm run build"
   },
   "author": "Arijit Chowdhury",
   "license": "ISC",
