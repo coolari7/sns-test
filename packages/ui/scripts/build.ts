@@ -3,14 +3,13 @@ import { exec, ExecOptions } from "child_process";
 import { promisify } from "util";
 import { EOL } from "os";
 
-const cwd = process.cwd();
 const run = promisify(exec);
-const build_dir = resolve(cwd, "dist");
+const build_dir = resolve(__dirname, "../dist");
 const babel_base = [
   "babel",
-  resolve(cwd, "src"),
+  resolve(__dirname, "../src"),
   "--config-file",
-  resolve(cwd, "babel.config.js"),
+  resolve(__dirname, "../babel.config.js"),
   "--extensions",
   [".ts", ".tsx"],
   "--ignore",
@@ -19,7 +18,11 @@ const babel_base = [
   "--no-copy-ignored",
 ];
 const types_base = ["tsc", "--declaration", "--emitDeclarationOnly"];
-const webpack_base = ["webpack", "--config", resolve(cwd, "webpack.config.ts")];
+const webpack_base = [
+  "webpack",
+  "--config",
+  resolve(__dirname, "../webpack.config.ts"),
+];
 
 const cjs_dir = resolve(build_dir, "cjs");
 const build_babel_cjs = babel_base.concat("--out-dir", cjs_dir);
@@ -54,7 +57,6 @@ async function build() {
   await build_umd();
 }
 
-// console.log(process.cwd());
 build().catch((e) => {
   console.log(e);
 });
